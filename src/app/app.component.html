@@ -1,0 +1,23 @@
+<div>
+  Hello world!
+
+  <br>
+  <br>
+  Choose yout theme :
+
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select [value]="CategoryOfQuestion()">
+      <mat-option
+        *ngFor="let category of QuestionCategories"
+        [value]="category"
+        (click)="CategoryOfQuestion.set(category)">
+          {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<app-question [Category]="CategoryOfQuestion()">
+</app-question>
