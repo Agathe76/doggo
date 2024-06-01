@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "quizzy": {
+    "doggo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/quizzy",
+            "outputPath": "dist/doggo",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -39,6 +39,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -77,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "quizzy:build:production"
+              "buildTarget": "doggo:build:production"
             },
             "development": {
-              "buildTarget": "quizzy:build:development"
+              "buildTarget": "doggo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -104,6 +105,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []

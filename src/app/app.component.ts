@@ -1,5 +1,5 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
-import { QuestionService } from './services/question.service';
+import { DogService } from './services/dog.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +7,16 @@ import { QuestionService } from './services/question.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  public CategoryOfQuestion: WritableSignal<string> = signal("");
+  public DogCategory: WritableSignal<string> = signal("");
 
-  public QuestionCategories: Array<string>;
+  public DogCategories: Array<string>;
 
-  public constructor(private questionService: QuestionService) {}
+  public constructor(private questionService: DogService) {}
 
   public ngOnInit(): void {
-    this.QuestionCategories = this.questionService.GetQuestionCategoriess();
+    this.DogCategories = this.questionService.GetDogCategoriess();
 
-    this.CategoryOfQuestion.set(this.QuestionCategories[0])
+    this.DogCategory.set(this.DogCategories[0])
   }
+  
 }
