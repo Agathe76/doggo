@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
 import { DogService } from '../../services/dog.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DogModel } from '../../models/dog.model';
 
 @Component({
   selector: 'app-dog-list',
@@ -10,7 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DogListComponent {
-  public Dogs: Signal<any | undefined> = toSignal(this.dogService.AllDogsFiltered$, { initialValue: [] });
+  public Dogs: Signal<Array<DogModel>> = toSignal(this.dogService.AllDogsFiltered$, { initialValue: [] });
 
   public constructor(public dogService: DogService, public router: Router) {}
  

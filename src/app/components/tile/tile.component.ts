@@ -6,6 +6,5 @@ import { Component, InputSignal, input } from '@angular/core';
   styleUrl: './tile.component.scss'
 })
 export class TileComponent {
-  public Name: InputSignal<any> = input.required<any>();
-
+  public Name: InputSignal<string> = input.required<string>();
 }
