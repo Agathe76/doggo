@@ -1,0 +1,30 @@
+<div class="filters">
+    <mat-form-field>
+        <mat-label>Select a name</mat-label>
+        <mat-select [value]="dogService.SelectedDogName()">
+            <mat-option 
+                (click)="dogService.SelectedDogName.set('')">None</mat-option>
+            <mat-option
+                *ngFor="let name of AllDogNames"
+                [value]="name"
+                (click)="dogService.SelectedDogName.set(name)">
+                {{ name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Select an energy level</mat-label>
+        <mat-select [value]="dogService.SelectedDogEnergyLevel()">
+            <mat-option
+            *ngFor="let energy of AllDogEnergyLevels"
+            [value]="energy"
+            (click)="dogService.SelectedDogEnergyLevel.set(energy)">
+                {{ energy }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div>
+    selection : name = {{dogService.SelectedDogName()}} : energy = {{dogService.SelectedDogEnergyLevel()}}
+</div>

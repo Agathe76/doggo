@@ -1,0 +1,22 @@
+import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
+import { DogService } from '../../services/dog.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+@Component({
+  selector: 'app-dog-list',
+  templateUrl: './dog-list.component.html',
+  styleUrl: './dog-list.component.scss',
+  //changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DogListComponent {
+  public Dogs: Signal<any | undefined> = toSignal(this.dogService.AllDogsFiltered$, { initialValue: [] });
+
+  public constructor(public dogService: DogService, public router: Router) {}
+ 
+  public GoToDogDetails(dogName: string): void {
+    // this.dogService.SelectedDogName.set(dogName);
+    this.router.navigate(['/', 'dog-details', dogName]);
+    // TODO resolver to load dog name before accessing to route and get dog from service in dog details component
+  }
+}

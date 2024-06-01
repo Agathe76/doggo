@@ -1,0 +1,13 @@
+<div class="dog">
+  <app-filters>
+  </app-filters>
+
+  <div class="dog-list">
+    <app-tile
+      class="dog-list-tile"
+      *ngFor="let dog of Dogs()"
+      [Name]="dog"
+      (click)="GoToDogDetails(dog.name)">
+    </app-tile>
+  </div>
+</div>

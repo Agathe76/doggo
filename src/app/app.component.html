@@ -1,27 +1,5 @@
-<div>
-  The doggo application
+<h1>
+  The Doggo application
+</h1>
 
-  <br>
-  <br>
-  Choose your dog cathegory :
-
-  <mat-form-field>
-    <mat-label>Select an option</mat-label>
-    <mat-select [value]="DogCategory()">
-      <mat-option
-        *ngFor="let category of DogCategories"
-        [value]="category"
-        (click)="DogCategory.set(category)">
-          {{ category }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-</div>
-
-<app-dog-details [Category]="DogCategory()">
-</app-dog-details>
-
-----------------------
-
-<app-dog-list></app-dog-list>
+<router-outlet></router-outlet>

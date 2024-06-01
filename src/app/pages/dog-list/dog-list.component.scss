@@ -1,0 +1,16 @@
+.dog {
+    background-color: lightgreen;
+
+    &-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        max-width: 100%;
+        flex-wrap: wrap;
+
+        &-tile {
+
+        }
+    }
+}
