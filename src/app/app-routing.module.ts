@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DogListComponent } from './pages/dog-list/dog-list.component';
 import { DogDetailsComponent } from './pages/dog-details/dog-details.component';
+import { SelectedDogGuard } from './guards/selected-dog.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'dog-details/:id',
-    component: DogDetailsComponent
+    component: DogDetailsComponent,
+    canActivate: [SelectedDogGuard]
   },
 ];
 

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -12,14 +12,12 @@ import { FilterModel } from '../models/filter.model';
 export class DogService {
   http = inject(HttpClient);
 
-  public SelectedDogName: WritableSignal<string> = signal('');
+  public SelectedDogDetails: WritableSignal<DogModel | undefined> = signal(undefined);
 
   public Filters: WritableSignal<FilterModel> = signal({
     name: '',
     energyLevel: -1,
   });
-
-  public SelectedDogEnergyLevel: WritableSignal<number> = signal(1);
 
   public AllDogs$: Observable<Array<DogModel>> = this.GetAllDogs();
 
@@ -46,13 +44,13 @@ export class DogService {
     }),
   );
 
-  public DogCategoryies: Array<string> = [
+  public DogNames: Array<string> = [
     "golden retriever",
     "australian stumpy tail cattle dog"
   ];
 
   public GetAllDogNames(): Array<string> {
-    return this.DogCategoryies.sort((a: string, b: string) => a.localeCompare(b));
+    return this.DogNames.sort((a: string, b: string) => a.localeCompare(b));
   }
 
   public GetDogByName(name: string): Observable<Array<DogModel>> {
@@ -68,6 +66,7 @@ export class DogService {
       'X-Api-Key': environment.ApiKey,
     };
 
+    // no get all in api    
     return forkJoin([
       this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?energy=1', { headers: headers }),
       this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?energy=2', { headers: headers }),
@@ -76,7 +75,8 @@ export class DogService {
       this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?energy=5', { headers: headers })
     ]).pipe(
       map((results: Array<Array<DogModel>>) => {
-        return results[0].concat(results[1]).concat(results[2]).concat(results[3]).concat(results[4]);
+        return results[0].concat(results[1]).concat(results[2]).concat(results[3]).concat(results[4])
+          .sort((a: DogModel, b: DogModel) => a.name.localeCompare(b.name));
       })
     );
   }
@@ -86,6 +86,11 @@ export class DogService {
       'X-Api-Key': environment.ApiKey,
     };
 
-    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?'.concat(params), { headers: headers });
+    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?'.concat(params), { headers: headers })
+      .pipe(
+        map((results: Array<DogModel>) => {
+          return results.sort((a: DogModel, b: DogModel) => a.name.localeCompare(b.name))
+        })
+      );
   }
 }
