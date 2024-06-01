@@ -1,3 +1,9 @@
 <div class="tile">
-    {{ Name() }}
+    <div class="tile-img">
+        <img [src]="Dog().image_link">
+        
+        <div class="tile-img-name">
+            {{ Dog().name }}
+        </div>
+    </div>
 </div>

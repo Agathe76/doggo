@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { DogModel } from '../models/dog.model';
+import { FilterModel } from '../models/filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,32 @@ export class DogService {
 
   public SelectedDogName: WritableSignal<string> = signal('');
 
-  public Filters: WritableSignal<string> = signal('');
+  public Filters: WritableSignal<FilterModel> = signal({
+    name: '',
+    energyLevel: -1,
+  });
 
   public SelectedDogEnergyLevel: WritableSignal<number> = signal(1);
 
   public AllDogs$: Observable<Array<DogModel>> = this.GetAllDogs();
 
-  public AllDogsFiltered$: Observable<Array<DogModel>> = toObservable(this.SelectedDogName).pipe(
-    switchMap((name: string) => {
-      if (name?.length > 0) {
-        return this.GetDogByName(name);
+  public AllDogsFiltered$: Observable<Array<DogModel>> = toObservable(this.Filters).pipe(
+    switchMap((filters: FilterModel) => {
+
+      console.log('filters ', filters);
+
+      let params: string = '';
+
+      if (filters.name !== '') {
+        params = params.concat("name=").concat(filters.name);
+      }
+
+      if (filters.energyLevel !== -1) {
+        params = params.concat("energy=").concat(filters.energyLevel.toString());
+      }
+
+      if (params.length > 0) {
+        return this.GetDogsFiltered(params);
       } else {
         return this.GetAllDogs();
       }
@@ -64,11 +81,11 @@ export class DogService {
     );
   }
 
-  public GetDogsByEnergy(energy: number): Observable<Array<DogModel>> {
+  public GetDogsFiltered(params: string): Observable<Array<DogModel>> {
     const headers = {
       'X-Api-Key': environment.ApiKey,
     };
 
-    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?energy=5', { headers: headers });
+    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?'.concat(params), { headers: headers });
   }
 }

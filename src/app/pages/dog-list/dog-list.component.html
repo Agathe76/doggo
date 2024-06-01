@@ -6,7 +6,7 @@
     <app-tile
       class="dog-list-tile"
       *ngFor="let dog of Dogs()"
-      [Name]="dog.name"
+      [Dog]="dog"
       (click)="GoToDogDetails(dog.name)">
     </app-tile>
   </div>

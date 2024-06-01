@@ -1,13 +1,13 @@
 <div class="filters">
     <mat-form-field>
         <mat-label>Select a name</mat-label>
-        <mat-select [value]="dogService.SelectedDogName()">
-            <mat-option 
-                (click)="dogService.SelectedDogName.set('')">None</mat-option>
+        <mat-select [value]="dogService.Filters().name">
+            <mat-option
+                (click)="SetName('')">None</mat-option>
             <mat-option
                 *ngFor="let name of AllDogNames"
                 [value]="name"
-                (click)="dogService.SelectedDogName.set(name)">
+                (click)="SetName(name)">
                 {{ name }}
             </mat-option>
         </mat-select>
@@ -15,16 +15,18 @@
 
     <mat-form-field>
         <mat-label>Select an energy level</mat-label>
-        <mat-select [value]="dogService.SelectedDogEnergyLevel()">
+        <mat-select [value]="dogService.Filters().energyLevel">
+            <mat-option
+                (click)="SetEnergyLevel(-1)">None</mat-option>
             <mat-option
             *ngFor="let energy of AllDogEnergyLevels"
             [value]="energy"
-            (click)="dogService.SelectedDogEnergyLevel.set(energy)">
+            (click)="SetEnergyLevel(energy)">
                 {{ energy }}
             </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 <div>
-    selection : name = {{dogService.SelectedDogName()}} : energy = {{dogService.SelectedDogEnergyLevel()}}
+    Filter selection : {{ dogService.Filters() | json }}
 </div>

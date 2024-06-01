@@ -1,5 +1,6 @@
 .dog {
     background-color: lightgreen;
+    padding-bottom: 40px;
 
     &-list {
         display: flex;
@@ -10,7 +11,7 @@
         flex-wrap: wrap;
 
         &-tile {
-            
+
         }
     }
 }

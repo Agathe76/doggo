@@ -1,4 +1,5 @@
 import { Component, InputSignal, input } from '@angular/core';
+import { DogModel } from '../../models/dog.model';
 
 @Component({
   selector: 'app-tile',
@@ -6,5 +7,5 @@ import { Component, InputSignal, input } from '@angular/core';
   styleUrl: './tile.component.scss'
 })
 export class TileComponent {
-  public Name: InputSignal<string> = input.required<string>();
+  public Dog: InputSignal<DogModel> = input.required<DogModel>();
 }

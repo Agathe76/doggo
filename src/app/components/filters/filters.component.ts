@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { DogService } from '../../services/dog.service';
+import { FilterModel } from '../../models/filter.model';
 
 @Component({
   selector: 'app-filters',
@@ -14,5 +15,13 @@ export class FiltersComponent {
   
   public ngOnInit(): void {
     this.AllDogNames = this.dogService.GetAllDogNames();
+  }
+
+  public SetName(name: string): void {
+    this.dogService.Filters.set({...this.dogService.Filters(), name: name});
+  }
+
+  public SetEnergyLevel(energyLevel: number): void {
+    this.dogService.Filters.set({...this.dogService.Filters(), energyLevel: energyLevel});
   }
 }
