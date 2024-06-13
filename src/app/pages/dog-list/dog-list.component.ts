@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, signal } from '@angular/core';
 import { DogService } from '../../services/dog.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DogModel } from '../../models/dog.model';
@@ -8,12 +8,13 @@ import { DogModel } from '../../models/dog.model';
   selector: 'app-dog-list',
   templateUrl: './dog-list.component.html',
   styleUrl: './dog-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DogListComponent {
-  public Dogs: Signal<Array<DogModel>> = toSignal(this.dogService.AllDogsFiltered$, { initialValue: [] });
+  // public Dogs: Signal<Array<DogModel>> = toSignal(this.dogService.AllDogsFiltered$, { initialValue: [] });
 
-  public constructor(public dogService: DogService, public router: Router) {}
+  public constructor(public dogService: DogService, public router: Router) {
+  }
  
   public GoToDogDetails(dog: DogModel): void {
     this.dogService.SelectedDogDetails.set(dog);

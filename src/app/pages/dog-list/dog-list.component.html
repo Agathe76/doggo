@@ -5,7 +5,7 @@
   <div class="dog-list">
     <app-tile
       class="dog-list-tile"
-      *ngFor="let dog of Dogs()"
+      *ngFor="let dog of dogService.AllDogsFiltered()"
       [Dog]="dog"
       (click)="GoToDogDetails(dog)">
     </app-tile>
