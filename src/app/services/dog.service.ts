@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal, WritableSignal, computed, effect, inject, signal } from '@angular/core';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, forkJoin, map, switchMap, tap } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable, forkJoin, map, tap } from 'rxjs';
 import { DogModel } from '../models/dog.model';
 import { FilterModel } from '../models/filter.model';
 
@@ -23,6 +22,23 @@ export class DogService {
 
   public GetAllDogNames(): Array<string> {
     return this.DogNames.sort((a: string, b: string) => a.localeCompare(b));
+  }
+  
+  public GetDogByName(name: string): Observable<DogModel> {
+    const headers = {
+      'X-Api-Key': environment.ApiKey,
+    };
+
+    // no get all in api    
+    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?name='.concat(encodeURI(name)), { headers: headers })
+      .pipe(
+        map((dogs: Array<DogModel>) => {
+          return dogs[0];
+        }),
+        tap((dog: DogModel) => {
+          this.SelectedDogDetails.set(dog);
+        })
+      );
   }
 
   public UpdateCurrentDogList(filters: FilterModel): Observable<Array<DogModel>> {

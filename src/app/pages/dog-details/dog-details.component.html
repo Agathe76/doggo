@@ -1,14 +1,74 @@
-<div class="dog-details">
-    <p>dog details</p>
+<div class="dog">
+    <img class="dog-avatar" [src]="dogService.SelectedDogDetails()?.image_link">
 
-    {{ dogService.SelectedDogDetails() | json }}
+    <h2> {{ dogService.SelectedDogDetails()?.name }} </h2>
 
-    <br>
-    <br>
-
-    <br>
-    <br>
-
-    <br>
-    <br>
+    <div class="dog-details">
+        <div class="dog-details-tile">
+            <b>good_with_children : </b> {{ dogService.SelectedDogDetails()?.good_with_children }}
+        </div>
+        <div class="dog-details-tile">
+            <b>good_with_other_dogs : </b> {{ dogService.SelectedDogDetails()?.good_with_other_dogs }}
+        </div>
+        <div class="dog-details-tile">
+            <b>shedding : </b> {{ dogService.SelectedDogDetails()?.shedding }}
+        </div>
+        <div class="dog-details-tile">
+            <b>grooming : </b> {{ dogService.SelectedDogDetails()?.grooming }}
+        </div>
+        <div class="dog-details-tile">
+            <b>drooling : </b> {{ dogService.SelectedDogDetails()?.drooling }}
+        </div>
+        <div class="dog-details-tile">
+            <b>coat_length : </b> {{ dogService.SelectedDogDetails()?.coat_length }}
+        </div>
+        <div class="dog-details-tile">
+            <b>good_with_strangers : </b> {{ dogService.SelectedDogDetails()?.good_with_strangers }}
+        </div>
+        <div class="dog-details-tile">
+            <b>playfulness : </b> {{ dogService.SelectedDogDetails()?.playfulness }}
+        </div>
+        <div class="dog-details-tile">
+            <b>protectiveness : </b> {{ dogService.SelectedDogDetails()?.protectiveness }}
+        </div>
+        <div class="dog-details-tile">
+            <b>trainability : </b> {{ dogService.SelectedDogDetails()?.trainability }}
+        </div>
+        <div class="dog-details-tile">
+            <b>energy : </b> {{ dogService.SelectedDogDetails()?.energy }}
+        </div>
+        <div class="dog-details-tile">
+            <b>barking : </b> {{ dogService.SelectedDogDetails()?.barking }}
+        </div>
+        <div class="dog-details-tile">
+            <b>min_life_expectancy : </b> {{ dogService.SelectedDogDetails()?.min_life_expectancy }}
+        </div>
+        <div class="dog-details-tile">
+            <b>max_life_expectancy : </b> {{ dogService.SelectedDogDetails()?.max_life_expectancy }}
+        </div>
+        <div class="dog-details-tile">
+            <b>max_height_male : </b> {{ dogService.SelectedDogDetails()?.max_height_male }}
+        </div>
+        <div class="dog-details-tile">
+            <b>max_height_female : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>max_weight_male : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>max_weight_female : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>min_height_male : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>min_height_female : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>min_weight_male : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+        <div class="dog-details-tile">
+            <b>min_weight_female : </b> {{ dogService.SelectedDogDetails()?.max_height_female }}
+        </div>
+    </div>
 </div>

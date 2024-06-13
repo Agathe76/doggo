@@ -1,34 +1,25 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 import { DogService } from '../services/dog.service';
+import { Observable, map, of } from "rxjs";
 import { DogModel } from "../models/dog.model";
-import { map } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class SelectedDogGuard implements CanActivate {
  
-    public constructor(private dogService: DogService, private router: Router) {}
+    public constructor(private dogService: DogService) {}
  
-    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log('route', route);
-
+    public canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
         if (!this.dogService.SelectedDogDetails()) {
-            /*
-            this.dogService.SelectedDogDetails.set(
-                this.dogService.AllDogs$.pipe(
-                    map((dogs: Array<DogModel>) => {
-                        return dogs.find((dog: DogModel) => dog.name = route.params['id']);
+            return this.dogService.GetDogByName(route.params['id']).pipe(
+                    map((dogDetails: DogModel) => {
+                        return !!dogDetails;
                     })
-                )
-            );
-            */
-           this.router.navigate(['']);
-
-            return false;
+                );
         } else {
-            return true;
+            return of(true);
         }
     }
 }

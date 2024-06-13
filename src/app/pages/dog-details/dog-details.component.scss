@@ -1,3 +1,23 @@
-.dog-details {
+.dog {
     background-color: lightcoral;
+
+    &-avatar {
+        width: 300px;
+    }
+
+    &-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 4px;
+
+        &-tile {
+            width: 200px;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            border: solid 1px black;
+        }
+    }
 }
