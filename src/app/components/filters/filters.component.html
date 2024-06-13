@@ -19,13 +19,29 @@
             <mat-option
                 (click)="DogEnergyLevel.set(-1)">None</mat-option>
             <mat-option
-                *ngFor="let energy of AllDogEnergyLevels"
+                *ngFor="let energy of OneToFiveList"
                 [value]="energy"
                 (click)="DogEnergyLevel.set(energy)">
                 {{ energy }}
             </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Select a protectivness level</mat-label>
+        <mat-select [value]="DogProtectiveNessLevel()">
+            <mat-option
+                (click)="DogProtectiveNessLevel.set(-1)">None</mat-option>
+            <mat-option
+                *ngFor="let protectivness of OneToFiveList"
+                [value]="protectivness"
+                (click)="DogProtectiveNessLevel.set(protectivness)">
+                {{ protectivness }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-stroked-button (click)="ResetFilters()">Reset filters</button>
 </div>
 <div>
     Filter selection : {{ Filters() | json }}

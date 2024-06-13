@@ -11,15 +11,17 @@ import { tap } from 'rxjs';
 })
 export class FiltersComponent {
   public AllDogNames: Array<string>;
-  public AllDogEnergyLevels: Array<number> = [ 1, 2, 3, 4, 5 ];
+  public OneToFiveList: Array<number>;
 
   public DogName: WritableSignal<string> = signal('');
   public DogEnergyLevel: WritableSignal<number> = signal(-1);
+  public DogProtectiveNessLevel: WritableSignal<number> = signal(-1);
 
   public Filters: Signal<FilterModel> = computed(() => {
     return {
       name: this.DogName(),
-      energyLevel: this.DogEnergyLevel(),
+      energy: this.DogEnergyLevel(),
+      protectiveness: this.DogProtectiveNessLevel(),
     }
   });
 
@@ -29,8 +31,14 @@ export class FiltersComponent {
       this.dogService.UpdateCurrentDogList(this.Filters()).subscribe();
     });
   }
-  
+
   public ngOnInit(): void {
     this.AllDogNames = this.dogService.GetAllDogNames();
+    this.OneToFiveList = [ 1, 2, 3, 4, 5 ];
+  }
+
+  public ResetFilters(): void {
+    this.DogName.set('');
+    this.DogEnergyLevel.set(-1);
   }
 }

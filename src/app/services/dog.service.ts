@@ -25,14 +25,6 @@ export class DogService {
     return this.DogNames.sort((a: string, b: string) => a.localeCompare(b));
   }
 
-  public GetDogByName(name: string): Observable<Array<DogModel>> {
-    const headers = {
-      'X-Api-Key': environment.ApiKey,
-    };
-
-    return this.http.get<Array<DogModel>>('https://api.api-ninjas.com/v1/dogs?name='.concat(encodeURI(name)), { headers: headers });
-  }
-
   public UpdateCurrentDogList(filters: FilterModel): Observable<Array<DogModel>> {
     if (this.MapFiltersToParam(filters).length === 0) {
       return this.GetAllDogs().pipe(
@@ -86,11 +78,15 @@ export class DogService {
     let params: string = '';
 
     if (filters.name !== '') {
-      params = params.concat("name=").concat(filters.name);
+      params = params.concat("name=").concat(filters.name).concat(";");
     }
 
-    if (filters.energyLevel !== -1) {
-      params = params.concat("energy=").concat(filters.energyLevel.toString());
+    if (filters.energy !== -1) {
+      params = params.concat("energy=").concat(filters.energy.toString()).concat(";");
+    }
+
+    if (filters.protectiveness !== -1) {
+      params = params.concat("protectiveness=").concat(filters.protectiveness.toString()).concat(";");
     }
 
     return params;

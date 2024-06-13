@@ -1,4 +1,5 @@
 export interface FilterModel {
     name: string;
-    energyLevel: number;
+    energy: number;
+    protectiveness: number;
 };
