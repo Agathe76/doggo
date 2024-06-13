@@ -9,6 +9,4 @@ import { DogService } from '../../services/dog.service';
 })
 export class DogDetailsComponent {
   public constructor(public dogService: DogService) {}
-
 }
-
